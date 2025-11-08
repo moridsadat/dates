@@ -6,6 +6,7 @@ export default function FlipCardPage() {
   const [apiData, setApiData] = useState(null);
   const [wiggleCard, setWiggleCard] = useState(null);
 
+  
   const cards = [
     { id: 1, front: 'گزینه اول', back: 'کارتینگ آزادی', description: '⚡️ماشین های کارتینگ 🏎 سرعت بالا دریفت خفن' },
     { id: 2, front: 'گزینه دوم', back: 'جامپو تجریش', description: 'تجربه ی متفاوت، خراب کردن وسایل با چکش 🔨، رد شدن از لیزر 🤸 و چند تا بازی خفن دیگه' },
