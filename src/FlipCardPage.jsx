@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 export default function FlipCardPage() {
   const [selected, setSelected] = useState(null);
-  const [apiData, setApiData] = useState(null);
+  const [apiData] = useState(null);
   const [wiggleCard, setWiggleCard] = useState(null);
 
   const cards = [
