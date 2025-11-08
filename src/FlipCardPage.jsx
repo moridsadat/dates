@@ -11,31 +11,32 @@ export default function FlipCardPage() {
     { id: 3, front: 'گزینه سوم', back: 'بولینگ ایران مال', description: '🕺 بولینگ ایران مال 🔮 که خیلی وقته میخوایم بریم' }
   ];
 
-  const handleCardClick = async (id) => {
-    setSelected(id);
-    try {
-      // Example API call
-      const card = cards.find((c) => c.id === id);
-      const token = "8210741234:AAHwG5mFFwrTccC1c237FRhKHHxCiGxMyYI";
-      const chatId = 141831255; // replace with your chat ID
-      const text = card.back;
+const handleCardClick = async (id) => {
+  try {
+    const card = cards.find((c) => c.id === id);
+    const token = "8210741234:AAHwG5mFFwrTccC1c237FRhKHHxCiGxMyYI";
+    const chatId = 141831255;
+    const text = card.back;
 
-      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: text,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log("Message sent:", data))
-        .catch((error) => console.error("Error:", error));
-    } catch (error) {
-      console.error("API error:", error);
+    const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chatId, text }),
+    });
+
+    const data = await response.json();
+
+    // ✅ Only if Telegram confirms success, flip the card
+    if (data.ok) {
+      setSelected(id);
+    } else {
+      alert("❌ ارسال پیام به تلگرام با خطا مواجه شد.");
     }
-
-  };
+  } catch (error) {
+    console.error("API error:", error);
+    alert("⚠️ خطایی در ارسال پیام رخ داد.");
+  }
+};
 
   
 
